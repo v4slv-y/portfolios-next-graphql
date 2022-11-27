@@ -19,7 +19,8 @@ const { portfolioResolvers } = require("./graphql/resolvers");
 const { portfolioTypes } = require("./graphql/types");
 
 app.prepare().then(() => {
-  const server = express();
+  const server = express()
+  //
 
   const schema = buildSchema(`
   ${portfolioTypes}
