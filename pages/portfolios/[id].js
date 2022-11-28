@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-
 // const PortfolioDetail = ({ query }) => {
 //   const { id } = query;
 

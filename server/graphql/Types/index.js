@@ -1,6 +1,4 @@
-exports.portfolioTypes = `
-type Job{
-  _id: ID
+const portfolioFields = `
   title: String,
   company: String,
   companyWebsite: String,
@@ -9,5 +7,15 @@ type Job{
   description: String,
   startDate: String,
   endDate: String
+`;
+
+exports.portfolioTypes = `
+type Job{
+  _id: ID
+  ${portfolioFields}
+}
+
+input PortfolioInput{
+  ${portfolioFields}
 }
 `;
