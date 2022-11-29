@@ -1,10 +1,3 @@
-// npm install --save express
-// "scripts": {
-//     "dev": "node server server/index.js", <- node vmesto next
-//     "build": "next build",
-//     "start": "next start"
-//   },
-
 const express = require("express");
 const next = require("next");
 
@@ -18,7 +11,7 @@ const handle = app.getRequestHandler();
 const { portfolioQueries, portfolioMutations } = require("./graphql/resolvers");
 const { portfolioTypes } = require("./graphql/types");
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = express();
 
   const typeDefs = gql`
@@ -42,6 +35,7 @@ app.prepare().then(() => {
   };
 
   const apolloServer = new ApolloServer({ typeDefs, resolvers });
+  await apolloServer.start();
   apolloServer.applyMiddleware({ app: server });
 
   server.get("*", (req, res) => {
