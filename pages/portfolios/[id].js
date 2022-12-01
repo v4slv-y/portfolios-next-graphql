@@ -2,16 +2,7 @@ import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { GET_PORTFOLIO } from "../../apollo/queries";
 
-const QUERR = gql`
-  query Portfolio($id: ID) {
-    portfolio(id: $id) {
-      title
-    }
-  }
-`;
-
 const PortfolioDetail = ({ query }) => {
-  // const [portfolio, setPortfolio] = useState(null);
   const { loading, error, data } = useQuery(GET_PORTFOLIO, {
     variables: { id: query.id },
   });
@@ -20,7 +11,7 @@ const PortfolioDetail = ({ query }) => {
     return "Loading...";
   }
 
-  const portfolio = data && data.portfolio;
+  const portfolio = (data && data.portfolio) || {};
 
   return (
     <div className="portfolio-detail">

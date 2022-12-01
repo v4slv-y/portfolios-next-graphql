@@ -42,8 +42,8 @@ export const CREATE_PORTFOLIO = gql`
         location: "Vilana, Latvia"
         jobTitle: "Rab"
         description: "Work hard and don't ask questions!"
-        startDate: "01/02/2011"
-        endDate: "04/02/2022"
+        startDate: "2011-02-05T08:00Z"
+        endDate: "2014-03-21T17:00Z"
       }
     ) {
       _id
@@ -56,5 +56,39 @@ export const CREATE_PORTFOLIO = gql`
       startDate
       endDate
     }
+  }
+`;
+
+export const UPDATE_PORTFOLIO = gql`
+  mutation UpdatePortfolio($id: ID!) {
+    updatePortfolio(
+      id: $id
+      input: {
+        title: "UPDATE Job in Vilani"
+        company: "UPDATE Wood manufacture"
+        companyWebsite: "UPDATE www.rabstvo.lv"
+        location: "UPDATE Vilana, Latvia"
+        jobTitle: "UPDATE Rab"
+        description: "UPDATE Work hard and don't ask questions!"
+        startDate: "2011-02-05T08:00Z"
+        endDate: "2014-03-21T17:00Z"
+      }
+    ) {
+      _id
+      title
+      company
+      companyWebsite
+      location
+      jobTitle
+      description
+      startDate
+      endDate
+    }
+  }
+`;
+
+export const DELETE_PORTFOLIO = gql`
+  mutation DeletePortfolio($id: ID!) {
+    deletePortfolio(id: $id)
   }
 `;

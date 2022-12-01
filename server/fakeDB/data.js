@@ -1,4 +1,4 @@
-const data_p = {
+const data = {
   portfolios: [
     {
       title: "Job in Netcentric",
@@ -30,36 +30,17 @@ const data_p = {
       startDate: "01/01/2010",
       endDate: "01/01/2011",
     },
+    {
+      title: "Work in Vilani",
+      company: "Gator",
+      companyWebsite: "www.derevja.lv",
+      location: "Vilani, Latvia",
+      jobTitle: "Rab",
+      description: "Wrok hard and don't ask questions!",
+      startDate: "04/04/2013",
+      endDate: "12/02/2014",
+    },
   ],
 };
 
-const Portfolio = require("../../database/models/portfolio");
-
-exports.portfolioQueries = {
-  portfolio: async (root, { id }, context) => {
-    return await context.models.Portfolio.getById(id);
-  },
-  portfolios: async (root, args, context) => {
-    return await context.models.Portfolio.getAll();
-  },
-};
-
-exports.portfolioMutations = {
-  createPortfolio: async (root, args, context) => {
-    const createdPortfolio = await Portfolio.create(args.input);
-    return createdPortfolio;
-  },
-  updatePortfolio: async (root, { id, input }, context) => {
-    const undatedPortfolio = await context.models.Portfolio.findAndUpdate(
-      id,
-      input
-    );
-    return undatedPortfolio;
-  },
-  deletePortfolio: async (root, args, context) => {
-    const deletetedPortfolioId = await context.models.Portfolio.findAndDelete(
-      args.id
-    );
-    return deletetedPortfolioId._id;
-  },
-};
+module.exports = data;

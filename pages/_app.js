@@ -8,6 +8,7 @@ import Navbar from "@/components/Shared/Navbar.js";
 import Hero from "../components/shared/Hero";
 
 const client = new ApolloClient({
+  ssrMode: true,
   uri: "http://localhost:3000/graphql",
   cache: new InMemoryCache(),
 });
