@@ -92,3 +92,34 @@ export const DELETE_PORTFOLIO = gql`
     deletePortfolio(id: $id)
   }
 `;
+
+export const SING_UP = gql`
+  mutation SingUp(
+    $avatar: String!
+    $username: String!
+    $email: String!
+    $password: String!
+    $passwordConfirmation: String!
+  ) {
+    singUp(
+      input: {
+        avatar: $avatar
+        username: $username
+        email: $email
+        password: $password
+        passwordConfirmation: $passwordConfirmation
+      }
+    )
+  }
+`;
+
+export const SING_IN = gql`
+  mutation SingIn($email: String!, $password: String!) {
+    singIn(input: { email: $email, password: $password }) {
+      _id
+      avatar
+      username
+      role
+    }
+  }
+`;
