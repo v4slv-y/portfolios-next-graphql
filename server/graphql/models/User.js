@@ -3,6 +3,16 @@ class User {
     this.Model = model; // shema mongoose
   }
 
+  async getAuthUser(ctx) {
+    console.log("getAuthUser function");
+    if (await ctx.isAuthenticated()) {
+      console.log("User from getAuthUser: ", ctx.getUser());
+      return ctx.getUser();
+    }
+    console.log("User from getAuthUser: ", ctx.getUser());
+    return null;
+  }
+
   async singUp(singUpData) {
     if (singUpData.password !== singUpData.passwordConfirmation) {
       throw new Error("Password must be the same as confirmation password!");

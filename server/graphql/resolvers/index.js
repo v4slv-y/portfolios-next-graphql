@@ -27,6 +27,12 @@ exports.portfolioMutations = {
   },
 };
 
+exports.userQueries = {
+  user: async (root, args, context) => {
+    return await context.models.User.getAuthUser(context);
+  },
+};
+
 exports.userMutations = {
   singUp: async (root, args, context) => {
     const registeredUser = await context.models.User.singUp(args.input);
