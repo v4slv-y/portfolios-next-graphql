@@ -1,21 +1,12 @@
 import PortfolioCard from "../../components/portfolios/PortfolioCard";
 import Link from "next/link";
-import {
-  useGetPortfolios,
-  useUpdatePortfolio,
-  useDeletePortfolio,
-  useCreatePortfolio,
-} from "@/apollo/actions";
+import { useGetPortfolios } from "@/apollo/actions";
 
 const Portfolios = () => {
   const { data } = useGetPortfolios();
-  const [updatePortfolio] = useUpdatePortfolio();
-  const [deletePortfolio] = useDeletePortfolio();
-  const [createPortfolio] = useCreatePortfolio();
 
   const portfolios_data = (data && data.portfolios) || [];
   console.log(portfolios_data);
-  // debugger;
 
   return (
     <>
@@ -26,9 +17,6 @@ const Portfolios = () => {
               <h1>Portfolios</h1>
             </div>
           </div>
-          <button onClick={createPortfolio} className="btn btn-primary">
-            Create Portfolio
-          </button>
         </section>
 
         <section className="pb-5">
@@ -44,22 +32,6 @@ const Portfolios = () => {
                     <PortfolioCard portfolio={prt} />
                   </a>
                 </Link>
-                <button
-                  className="btn btn-warning"
-                  onClick={() =>
-                    updatePortfolio({ variables: { id: prt._id } })
-                  }
-                >
-                  Update
-                </button>
-                <button
-                  className="btn btn-danger"
-                  onClick={() =>
-                    deletePortfolio({ variables: { id: prt._id } })
-                  }
-                >
-                  Delete
-                </button>
               </div>
             ))}
           </div>

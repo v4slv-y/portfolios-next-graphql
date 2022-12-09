@@ -33,17 +33,26 @@ export const GET_PORTFOLIOS = gql`
 `;
 
 export const CREATE_PORTFOLIO = gql`
-  mutation ProtfolioCreate {
+  mutation ProtfolioCreate(
+    $title: String!
+    $company: String!
+    $companyWebsite: String!
+    $location: String!
+    $jobTitle: String!
+    $description: String!
+    $startDate: String!
+    $endDate: String
+  ) {
     createPortfolio(
       input: {
-        title: "Job in Vilani"
-        company: "Wood manufacture"
-        companyWebsite: "www.rabstvo.lv"
-        location: "Vilana, Latvia"
-        jobTitle: "Rab"
-        description: "Work hard and don't ask questions!"
-        startDate: "2011-02-05T08:00Z"
-        endDate: "2014-03-21T17:00Z"
+        title: $title
+        company: $company
+        companyWebsite: $companyWebsite
+        location: $location
+        jobTitle: $jobTitle
+        description: $description
+        startDate: $startDate
+        endDate: $endDate
       }
     ) {
       _id
@@ -118,6 +127,22 @@ export const SING_IN = gql`
     singIn(input: { email: $email, password: $password }) {
       _id
       avatar
+      username
+      role
+    }
+  }
+`;
+
+export const SING_OUT = gql`
+  mutation SingOut {
+    singOut
+  }
+`;
+
+export const GET_USER = gql`
+  query User {
+    user {
+      _id
       username
       role
     }

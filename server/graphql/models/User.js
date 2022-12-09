@@ -3,10 +3,11 @@ class User {
     this.Model = model; // shema mongoose
   }
 
-  async getAuthUser(ctx) {
+  getAuthUser(ctx) {
     console.log("getAuthUser function");
-    if (await ctx.isAuthenticated()) {
-      console.log("User from getAuthUser: ", ctx.getUser());
+    console.log("is user Authenticated? ", ctx.isAuthenticated());
+    if (ctx.isAuthenticated()) {
+      console.log("(if statement) User from getAuthUser: ", ctx.getUser());
       return ctx.getUser();
     }
     console.log("User from getAuthUser: ", ctx.getUser());
@@ -31,9 +32,8 @@ class User {
   async singIn(singInData, ctx) {
     try {
       const user = await ctx.authenticate(singInData);
-      console.log("is Authenticacted, ", ctx.isAuthenticated());
+      console.log("(User.singIn) is Authenticacted, ", ctx.isAuthenticated());
       console.log("User: ", ctx.getUser());
-      // console.log(user);
       return user;
     } catch (error) {
       return error;

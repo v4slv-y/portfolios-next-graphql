@@ -32,6 +32,7 @@
     "passport-strategy": "^1.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.40.0",
     "sass": "^1.56.1"

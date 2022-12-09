@@ -1,11 +1,19 @@
 import LogInForm from "../components/forms/LogInForm";
-import { SING_IN } from "../apollo/queries";
+import { GET_USER, SING_IN } from "../apollo/queries";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 
 const Login = () => {
   const router = useRouter();
-  const [mutationFunc] = useMutation(SING_IN);
+  const [mutationFunc, { data, loading, error }] = useMutation(SING_IN, {
+    update(cache, { data: { singIn: singedUser } }) {
+      cache.writeQuery({
+        query: GET_USER,
+        data: { user: singedUser },
+      });
+    },
+  });
+
   const newLogInData = (loginData) => {
     mutationFunc({ variables: loginData })
       .then((resp) => console.log(resp))
@@ -19,7 +27,7 @@ const Login = () => {
         <div className="row">
           <div className="col-md-5 mx-auto">
             <h1 className="page-title">Login</h1>
-            <LogInForm getLogInData={newLogInData} />
+            <LogInForm loadint={loading} getLogInData={newLogInData} />
           </div>
         </div>
       </div>
