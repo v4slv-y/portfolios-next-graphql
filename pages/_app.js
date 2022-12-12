@@ -4,6 +4,8 @@ import "isomorphic-unfetch";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/index.scss";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 import AppNavbar from "@/components/Shared/Navbar.js";
 import Hero from "../components/shared/Hero";
@@ -12,6 +14,13 @@ const client = new ApolloClient({
   ssrMode: true,
   uri: "http://localhost:3000/graphql",
   cache: new InMemoryCache(),
+  // resolvers: {
+  //   Portfolio: {
+  //     daysOfExperience() {
+  //       return "100";
+  //     },
+  //   },
+  // },
 });
 
 const MyApp = ({ Component, pageProps }) => {
@@ -36,6 +45,7 @@ const MyApp = ({ Component, pageProps }) => {
           </footer>
         )}
       </div>
+      <ToastContainer />
     </ApolloProvider>
   );
 };

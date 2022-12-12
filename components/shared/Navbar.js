@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useLazyGetUser } from "../../apollo/actions";
 import { useEffect, useState } from "react";
 
-const AppLink = ({ children, className, href }) => (
-  <Link legacyBehavior href={href}>
+const AppLink = ({ children, className, href, as }) => (
+  <Link legacyBehavior href={href} as={as}>
     <a className={className}>{children}</a>
   </Link>
 );
@@ -56,21 +56,23 @@ const AppNavbar = () => {
                     title="Manage"
                     id="basic-nav-dropdown"
                   >
-                    {(user.role === "admin" || user.role === "admin") && (
-                      <AppLink href="/portfolios/new" className="dropdown-item">
-                        Create Portfolio
-                      </AppLink>
+                    {(user.role === "admin" || user.role === "instructor") && (
+                      <>
+                        <AppLink
+                          href="/portfolios/new"
+                          className="dropdown-item"
+                        >
+                          Create Portfolio
+                        </AppLink>
+                        <AppLink
+                          href="/instructor/[id]/dboard"
+                          as={`/instructor/${user._id}/dboard`}
+                          className="dropdown-item"
+                        >
+                          DashBoard
+                        </AppLink>
+                      </>
                     )}
-                    <NavDropdown.Item href="#action/3.2">
-                      Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">
-                      Something
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">
-                      Separated link
-                    </NavDropdown.Item>
                   </NavDropdown>
                   <AppLink href={"/logout"} className="nav-link btn btn-danger">
                     Sing Out

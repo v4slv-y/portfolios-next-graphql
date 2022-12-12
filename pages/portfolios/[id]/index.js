@@ -1,17 +1,32 @@
-import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import { GET_PORTFOLIO } from "../../apollo/queries";
+// import { GET_PORTFOLIO } from "../../../apollo/queries";
+import { useGetPortfolio } from "../../../apollo/actions";
+import { formatDate } from "../../../utils/functions";
+import moment from "moment";
 
 const PortfolioDetail = ({ query }) => {
-  const { loading, error, data } = useQuery(GET_PORTFOLIO, {
-    variables: { id: query.id },
-  });
+  // const { loading, error, data } = useQuery(GET_PORTFOLIO, {
+  //   variables: { id: query.id },
+  // });
 
-  if (loading) {
-    return "Loading...";
-  }
+  // if (loading) {
+  //   return "Loading...";
+  // }
 
+  // const portfolio = (data && data.portfolio) || {};
+
+  const { data } = useGetPortfolio({ variables: { id: query.id } });
   const portfolio = (data && data.portfolio) || {};
+
+  function experienceDaysCount() {
+    let now = moment().unix();
+
+    if (portfolio.endDate) now = portfolio.endDate / 1000;
+
+    return moment
+      .unix(now)
+      .diff(moment.unix(portfolio.startDate / 1000), "days");
+  }
 
   return (
     <div className="portfolio-detail">
@@ -34,14 +49,16 @@ const PortfolioDetail = ({ query }) => {
             <h4 className="title">Location</h4>
             <p className="text">{portfolio.location}</p>
             <h4 className="title">Start Date</h4>
-            <p className="text">{portfolio.startDate}</p>
+            <p className="text">{formatDate(portfolio.startDate)}</p>
           </div>
           <div className="col-lg-6">
-            {/* TODO: days later... */}
             <h4 className="title">Days</h4>
-            <p className="text">44</p>
+            <p className="text">{experienceDaysCount()}</p>
             <h4 className="title">End Date</h4>
-            <p className="text">{portfolio.endDate}</p>
+            <p className="text">
+              {(portfolio.endDate && formatDate(portfolio.endDate)) ||
+                "Present day."}
+            </p>
           </div>
           <div className="col-md-12">
             <hr />

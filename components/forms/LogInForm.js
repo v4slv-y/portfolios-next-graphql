@@ -28,7 +28,7 @@ const LogInForm = ({ getLogInData, loading }) => {
       {loading && "Singing in..."}
       {!loading && (
         <button type="submit" className="btn btn-main bg-blue py-2 ttu">
-          Submit
+          LogIn
         </button>
       )}
     </form>

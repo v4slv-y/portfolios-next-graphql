@@ -8,7 +8,7 @@ const {
   portfolioQueries,
   portfolioMutations,
   userMutations,
-  userQueries
+  userQueries,
 } = require("./resolvers");
 
 exports.createApolloServer = () => {
@@ -19,7 +19,8 @@ exports.createApolloServer = () => {
     type Query {
       portfolio(id: ID!): Job
       portfolios: [Job]
-      
+      userPortfolios: [Job]
+
       user(id: ID): User
     }
 
@@ -42,10 +43,10 @@ exports.createApolloServer = () => {
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({req}) => ({
+    context: ({ req }) => ({
       ...buildAuthContext(req),
       models: {
-        Portfolio: new Portfolio(mongooseModel.model("Portfolio")),
+        Portfolio: new Portfolio(mongooseModel.model("Portfolio"), req.user),
         User: new User(mongooseModel.model("User")),
       },
     }),

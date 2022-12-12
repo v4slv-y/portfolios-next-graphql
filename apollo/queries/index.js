@@ -1,9 +1,32 @@
 import { gql } from "@apollo/client";
 
+export const GET_USER_PORTFOLIOS = gql`
+  query UserPortfolios {
+    userPortfolios {
+      _id
+      title
+      jobTitle
+      startDate
+      endDate
+    }
+  }
+`;
+
+export const GET_USER = gql`
+  query User {
+    user {
+      _id
+      username
+      role
+    }
+  }
+`;
+
 export const GET_PORTFOLIO = gql`
   query Portfolio($id: ID!) {
     portfolio(id: $id) {
       _id
+      # daysOfExperience @client
       title
       company
       companyWebsite
@@ -69,18 +92,28 @@ export const CREATE_PORTFOLIO = gql`
 `;
 
 export const UPDATE_PORTFOLIO = gql`
-  mutation UpdatePortfolio($id: ID!) {
+  mutation UpdatePortfolio(
+    $id: ID
+    $title: String
+    $company: String
+    $companyWebsite: String
+    $location: String
+    $jobTitle: String
+    $description: String
+    $startDate: String
+    $endDate: String
+  ) {
     updatePortfolio(
       id: $id
       input: {
-        title: "UPDATE Job in Vilani"
-        company: "UPDATE Wood manufacture"
-        companyWebsite: "UPDATE www.rabstvo.lv"
-        location: "UPDATE Vilana, Latvia"
-        jobTitle: "UPDATE Rab"
-        description: "UPDATE Work hard and don't ask questions!"
-        startDate: "2011-02-05T08:00Z"
-        endDate: "2014-03-21T17:00Z"
+        title: $title
+        company: $company
+        companyWebsite: $companyWebsite
+        location: $location
+        jobTitle: $jobTitle
+        description: $description
+        startDate: $startDate
+        endDate: $endDate
       }
     ) {
       _id
@@ -136,15 +169,5 @@ export const SING_IN = gql`
 export const SING_OUT = gql`
   mutation SingOut {
     singOut
-  }
-`;
-
-export const GET_USER = gql`
-  query User {
-    user {
-      _id
-      username
-      role
-    }
   }
 `;
