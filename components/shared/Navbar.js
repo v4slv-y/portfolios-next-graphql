@@ -3,11 +3,13 @@ import Link from "next/link";
 import { useLazyGetUser } from "../../apollo/actions";
 import { useEffect, useState } from "react";
 
-const AppLink = ({ children, className, href, as }) => (
-  <Link legacyBehavior href={href} as={as}>
-    <a className={className}>{children}</a>
-  </Link>
-);
+const AppLink = ({ children, className, href, as }) => {
+  return (
+    <Link legacyBehavior href={href} as={as}>
+      <a className={className}>{children}</a>
+    </Link>
+  );
+};
 
 // legacyBehavior
 
@@ -50,6 +52,7 @@ const AppNavbar = () => {
             <Nav>
               {user && (
                 <>
+                  {console.log(user)}
                   <span className="nav-link mr-2">Welcome {user.username}</span>
                   <NavDropdown
                     className="mr-2"
@@ -81,6 +84,7 @@ const AppNavbar = () => {
               )}
               {(error || !user) && (
                 <>
+                  {error && alert(error)}
                   <AppLink href={"/login"} className="mr-3 nav-link">
                     Sing In
                   </AppLink>

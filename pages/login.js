@@ -27,7 +27,7 @@ const Login = () => {
         <div className="row">
           <div className="col-md-5 mx-auto">
             <h1 className="page-title">Login</h1>
-            <LogInForm loadint={loading} getLogInData={newLogInData} />
+            <LogInForm ldng={loading} getLogInData={newLogInData} />
           </div>
         </div>
       </div>

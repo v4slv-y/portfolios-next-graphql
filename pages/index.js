@@ -78,7 +78,7 @@ const Home = () => (
       See More Posts
     </a>
 
-    <div className="reply-controls">
+    {/* <div className="reply-controls">
       <div className="reply-area">
         <div className="reply-to">
           Reply To: <span className="text ml-2">User1</span>
@@ -108,7 +108,7 @@ const Home = () => (
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
   </>
 );
 

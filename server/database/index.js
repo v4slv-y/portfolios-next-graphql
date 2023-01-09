@@ -12,6 +12,9 @@ const configm = {
 
 require("./models/portfolio");
 require("./models/user");
+require("./models/forumCategory");
+require("./models/topic");
+require("./models/post");
 
 exports.connect = () => {
   mongoose.connect(config.DB_URI, configm, () => {

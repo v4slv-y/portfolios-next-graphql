@@ -1,5 +1,129 @@
 import { gql } from "@apollo/client";
 
+export const CREATE_POST = gql`
+  mutation CreatePost($content: String, $topic: String, $parent: String) {
+    createPost(input: { content: $content, topic: $topic, parent: $parent }) {
+      _id
+      content
+      slug
+      createdAt
+      user {
+        username
+        avatar
+      }
+      parent {
+        content
+        user {
+          username
+          avatar
+        }
+      }
+    }
+  }
+`;
+
+export const POSTS_BY_TOPIC = gql`
+  query PostsByTopic($slug: String, $pageNum: Int, $pageSize: Int) {
+    postsByTopic(slug: $slug, pageNum: $pageNum, pageSize: $pageSize) {
+      posts {
+        _id
+        content
+        slug
+        createdAt
+        user {
+          username
+          avatar
+        }
+        parent {
+          content
+          user {
+            username
+            avatar
+          }
+        }
+      }
+      count
+    }
+  }
+`;
+
+export const TOPIC_BY_SLUG = gql`
+  query TopicBySlug($slug: String) {
+    topicBySlug(slug: $slug) {
+      content
+      title
+      _id
+      slug
+      user {
+        username
+        avatar
+      }
+      forumCategory {
+        _id
+        slug
+        title
+      }
+    }
+  }
+`;
+
+export const CREATE_TOPIC = gql`
+  mutation CreateTopic(
+    $title: String
+    $content: String
+    $forumCategory: String
+  ) {
+    createTopic(
+      input: { title: $title, content: $content, forumCategory: $forumCategory }
+    ) {
+      _id
+      title
+      content
+      slug
+      content
+      user {
+        username
+        avatar
+      }
+      forumCategory {
+        _id
+        title
+        slug
+      }
+    }
+  }
+`;
+
+export const TOPICS_BY_CATEGORY = gql`
+  query TopicsByCategory($category: String) {
+    topicsByCategory(category: $category) {
+      _id
+      slug
+      title
+      content
+      user {
+        username
+        avatar
+      }
+      forumCategory {
+        _id
+        title
+        slug
+      }
+    }
+  }
+`;
+
+export const FORUM_CATEGORIES = gql`
+  query ForumCategories {
+    forumCategories {
+      slug
+      title
+      subTitle
+    }
+  }
+`;
+
 export const GET_USER_PORTFOLIOS = gql`
   query UserPortfolios {
     userPortfolios {
